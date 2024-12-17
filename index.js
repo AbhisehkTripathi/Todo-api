@@ -2,8 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const taskRoutes = require('../Todo-api/taskRoutes');
+
 const app = express();
-const PORT = 4000;
 
 // Middleware
 app.use(bodyParser.json());
@@ -18,10 +18,8 @@ mongoose.connect('mongodb://localhost:27017/crudDB', {
     console.error('Error connecting to MongoDB:', err);
 });
 
+// Routes
+app.use('/api', taskRoutes);
 
-app.use('/api',taskRoutes)
-
-
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-});
+// Export the express app as a serverless function
+module.exports = app;
