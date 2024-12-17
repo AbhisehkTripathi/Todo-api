@@ -18,6 +18,7 @@ mongoose.connect("mongodb+srv://mohittripathi2096a:<db_password>@cluster0.oqi2n.
     console.log('Connected to MongoDB');
 }).catch(err => {
     console.error('Error connecting to MongoDB:', err);
+    process.exit(1);  
 });
 
 // Routes
