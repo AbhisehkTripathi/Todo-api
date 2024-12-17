@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/crudDB';  // Fallback to local DB for local testing
 
 // MongoDB Connection
-mongoose.connect('mongodb://localhost:27017/crudDB', {
+mongoose.connect("mongodb+srv://mohittripathi2096a:<db_password>@cluster0.oqi2n.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
