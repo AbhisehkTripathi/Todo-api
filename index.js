@@ -2,11 +2,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const taskRoutes = require('../Todo-api/taskRoutes');
+const serverless = require('serverless-http'); // Import serverless-http
 
 const app = express();
 
 // Middleware
 app.use(bodyParser.json());
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/crudDB';  // Fallback to local DB for local testing
 
 // MongoDB Connection
 mongoose.connect('mongodb://localhost:27017/crudDB', {
@@ -21,5 +23,5 @@ mongoose.connect('mongodb://localhost:27017/crudDB', {
 // Routes
 app.use('/api', taskRoutes);
 
-// Export the express app as a serverless function
-module.exports = app;
+// Wrap the app with serverless-http
+module.exports.handler = serverless(app);  // Export handler as serverless function
